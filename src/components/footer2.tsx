@@ -44,6 +44,22 @@ const Footer = () => {
       className="relative overflow-hidden border-t border-white/10 bg-slate-950/95 py-14 px-6 sm:px-8 lg:px-14"
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-[radial-gradient(circle_at_top,_rgba(168,85,247,0.12),_transparent_42%)]" />
+      <motion.span
+        initial={{ x: -280, opacity: 0.12, y: -4 }}
+        animate={{ x: 1180 }}
+        transition={{ repeat: Infinity, duration: 34, ease: "linear" }}
+        className="pointer-events-none absolute left-0 top-10 z-0 inline-block whitespace-nowrap text-4xl font-black uppercase tracking-[0.5em] text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-fuchsia-300 to-purple-400"
+      >
+        #JusticeForHadi
+      </motion.span>
+      <motion.span
+        initial={{ x: 280, opacity: 0.1, y: 10 }}
+        animate={{ x: -980 }}
+        transition={{ repeat: Infinity, duration: 38, ease: "linear" }}
+        className="pointer-events-none absolute left-0 top-24 z-0 inline-block whitespace-nowrap text-3xl font-black uppercase tracking-[0.4em] text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-cyan-300 to-pink-300"
+      >
+        #JusticeForHadi
+      </motion.span>
       <div className="relative mx-auto flex max-w-6xl flex-col gap-12">
         <motion.div variants={itemVariants} className="grid gap-8 lg:grid-cols-[1.6fr_1fr] xl:gap-12">
           <div className="rounded-[2rem] border border-white/10 bg-slate-900/75 p-8 shadow-[0_35px_70px_rgba(15,23,42,0.25)] backdrop-blur-xl">
@@ -59,7 +75,7 @@ const Footer = () => {
           <div className="rounded-[2rem] border border-white/10 bg-slate-900/75 p-7 shadow-[0_35px_70px_rgba(15,23,42,0.18)] backdrop-blur-xl">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <h3 className="text-xl font-semibold text-white">Navigation</h3>
-              <Link href="/contact" className="inline-flex items-center rounded-full bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 px-5 py-2 text-sm font-semibold text-white transition hover:scale-[1.02]">
+              <Link href="/#contact" className="inline-flex items-center rounded-full bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 px-5 py-2 text-sm font-semibold text-white transition hover:scale-[1.02]">
                 Contact Me
               </Link>
             </div>
@@ -67,9 +83,10 @@ const Footer = () => {
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {[
                 { label: "Home", url: "/" },
-                { label: "About", url: "/about" },
-                { label: "Contact", url: "/contact" },
-                { label: "Terms", url: "/terms" },
+                { label: "About", url: "/#about-me" },
+                { label: "Projects", url: "/#projects" },
+                { label: "Contact", url: "/#contact" },
+                // { label: "Terms", url: "/terms" },
               ].map((item) => (
                 <Link
                   key={item.label}

@@ -54,6 +54,7 @@ const EventCategories = () => {
 
   return (
     <motion.section
+      id="projects"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}

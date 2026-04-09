@@ -44,6 +44,7 @@ const ContactUs = () => {
 
   return (
     <motion.section
+      id="contact"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}

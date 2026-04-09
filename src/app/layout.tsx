@@ -11,6 +11,7 @@ import CallToActionSection from "./components/call/CallToActionSection";
 import Footer from "@/components/footer2";
 import ClientWrapper from "./components/ClientWrapper";
 import NavBar from "@/components/navbar1";
+import Education from "./components/Education";
 
 
 const geistSans = Geist({
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <UpcomingEventsSlider />
           <EventCategories />
           <CallToActionSection />
+          <Education></Education>
         </ClientWrapper>
 
         <Toaster richColors />

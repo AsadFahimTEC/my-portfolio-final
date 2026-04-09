@@ -1,70 +1,121 @@
 "use client";
 
-import { useQuery, UseQueryOptions } from "@tanstack/react-query";
-import { useState } from "react";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
-interface Event {
-  id: number;
-  title: string;
-  date: string;
-  fee: number;
-  organizer: string;
-  isPublic: boolean;
-}
+const UpcomingEventsSlider = () => {
+  const [isVisible, setIsVisible] = useState(false);
 
-export default function UpcomingEventsSlider() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
-  const fetchEvents = async (): Promise<Event[]> => {
-    const res = await fetch("http://localhost:5000/api/events", {
-      credentials: "include",
-    });
-    if (!res.ok) throw new Error("Failed to fetch events");
+  const skills = [
+    { name: "HTML", src: "https://i.ibb.co/BwZ0F69/png-transparent-logo-html-html5-thumbnail-removebg-preview.png" },
+    { name: "CSS", src: "https://i.ibb.co/Lvbw8KV/png-clipart-html-css3-cascading-style-sheets-logo-markup-language-digital-agency-miscellaneous-blue.png" },
+    { name: "JavaScript", src: "https://i.ibb.co/cthQ5yz/javascript-1024x341-removebg-preview.png" },
+    { name: "TypeScript", src: "https://i.ibb.co/Xk8P0rn/download-removebg-preview.png" },
+    { name: "React", src: "https://i.ibb.co/RBf741X/React-icon-svg-removebg-preview.png" },
+    { name: "Next.js", src: "https://i.ibb.co/TPtC5jD/1-t-OI6-UC5-Ea-S2f-PIt-Ces-I-AQ-removebg-preview.png" },
+    { name: "Express.js", src: "https://i.ibb.co/ZTq2R4Z/png-transparent-express-js-node-js-javascript-mongodb-node-js-text-trademark-logo-removebg-preview.png" },
+    { name: "MongoDB", src: "https://i.ibb.co/PZ1Cpf5/1-do-Ag1-f-MQKWFoub-6gw-Ui-Q-removebg-preview.png" },
+  ];
 
-    const result = await res.json();
+  const duplicatedSkills = [...skills, ...skills]; // Duplicate for seamless loop
 
-    // Normalize data: support { data: [...] } or direct array
-    if (Array.isArray(result)) return result;
-    if (Array.isArray(result.data)) return result.data;
-
-    return []; // fallback to empty array
-  };
-
-  const queryOptions: UseQueryOptions<Event[], Error, Event[], ["events"]> = {
-    queryKey: ["events"],
-    queryFn: fetchEvents,
-    retry: 1,
-    // @ts-ignore
-    onError: (err: Error) => {
-      console.error("Fetch events error:", err.message);
-      if (err.message.includes("Unauthorized")) {
-        setIsLoggedIn(false);
-      }
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+      },
     },
   };
 
-  const { data, error, isLoading } = useQuery(queryOptions);
-
-  if (!isLoggedIn) return <p>Please log in to see events.</p>;
-  if (isLoading) return <p>Loading events...</p>;
-  if (error) return <p className="text-red-500">{error.message}</p>;
-
-  // Make sure data is always an array
-  const events = data ?? [];
+  const titleVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+      },
+    },
+  };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {events.map((event) => (
-        <div
-          key={event.id}
-          className="bg-white dark:bg-slate-800 p-5 rounded-xl shadow"
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      variants={containerVariants}
+      className="relative overflow-hidden bg-slate-950/95 py-16 sm:py-20"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(56,189,248,0.08),_transparent_50%)]" />
+
+      <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
+        <motion.h2
+          variants={titleVariants}
+          className="mb-12 text-center text-3xl font-bold text-white sm:text-4xl lg:text-5xl"
         >
-          <h3 className="font-bold">{event.title}</h3>
-          <p>Date: {new Date(event.date).toLocaleDateString()}</p>
-          <p>Organizer: {event.organizer}</p>
-          <p>Fee: {event.fee === 0 ? "Free" : `৳ ${event.fee}`}</p>
+          <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            My Skills
+          </span>
+        </motion.h2>
+
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-slate-900/50 p-8 shadow-2xl backdrop-blur-xl">
+          <div className="flex space-x-8 overflow-hidden">
+            <motion.div
+              animate={{
+                x: isVisible ? [0, -100 * skills.length] : 0,
+                transition: {
+                  x: {
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    duration: 20,
+                    ease: "linear",
+                  },
+                },
+              }}
+              className="flex space-x-8"
+            >
+              {duplicatedSkills.map((skill, index) => (
+                <motion.div
+                  key={`${skill.name}-${index}`}
+                  whileHover={{ scale: 1.1, y: -5 }}
+                  className="flex-shrink-0 rounded-2xl border border-white/10 bg-white/5 p-6 shadow-lg backdrop-blur-sm transition-all hover:border-cyan-400/30 hover:shadow-cyan-500/20"
+                >
+                  <img
+                    src={skill.src}
+                    alt={`${skill.name} logo`}
+                    className="h-16 w-16 object-contain sm:h-20 sm:w-20"
+                    loading="lazy"
+                  />
+                  <p className="mt-3 text-center text-sm font-medium text-white sm:text-base">
+                    {skill.name}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </div>
-      ))}
-    </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="mt-12 text-center"
+        >
+          <p className="text-lg text-slate-300 sm:text-xl">
+            Continuously learning and mastering new technologies to build better experiences.
+          </p>
+        </motion.div>
+      </div>
+    </motion.section>
   );
-}
+};
+
+export default UpcomingEventsSlider;

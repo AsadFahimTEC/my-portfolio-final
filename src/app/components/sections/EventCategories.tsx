@@ -8,26 +8,35 @@ const EventCategories = () => {
     {
       id: 1,
       title: "JourneyJive",
-      description: "A comprehensive tourist guide platform offering 6 popular packages including JiveDiscover, JiveVoyages, JiveDestiny, JiveOdyssey, JiveWanderlust, and JiveHorizons for seamless travel planning.",
+      description:
+        "A comprehensive tourist guide platform offering 6 popular packages including JiveDiscover, JiveVoyages, JiveDestiny, JiveOdyssey, JiveWanderlust, and JiveHorizons for seamless travel planning.",
       liveUrl: "https://peoplepro-af1ed.web.app",
       codeUrl: "https://github.com/AsadFahimTEC/b8a12-client-side",
       gradient: "from-blue-500 to-cyan-500",
+      image: "https://s.wordpress.com/mshots/v1/https://peoplepro-af1ed.web.app?w=900",
+      imageAlt: "JourneyJive website screenshot",
     },
     {
       id: 2,
       title: "BookStore",
-      description: "A book services platform providing book recommendations, literary events calendar, book club subscriptions, and bookstore loyalty programs for avid readers.",
+      description:
+        "A book services platform providing book recommendations, literary events calendar, book club subscriptions, and bookstore loyalty programs for avid readers.",
       liveUrl: "https://654cd7a74cf70141250f52fc--cosmic-crisp-16b882.netlify.app",
       codeUrl: "https://github.com/AsadFahimTEC/b8a11-client-side",
       gradient: "from-green-500 to-emerald-500",
+      image: "https://s.wordpress.com/mshots/v1/https://654cd7a74cf70141250f52fc--cosmic-crisp-16b882.netlify.app?w=900",
+      imageAlt: "BookStore website screenshot",
     },
     {
       id: 3,
-      title: "Drinko",
-      description: "A food and beverage platform featuring 6 major brands including Coca-Cola, McDonald's, Starbucks, PepsiCo, Nestlé, and Kellogg's with an intuitive navigation experience.",
-      liveUrl: "https://brand-shop-e0506.web.app",
-      codeUrl: "https://github.com/AsadFahimTEC/b8a10-brandshop-client-side",
+      title: "Asad Tech BD",
+      description:
+        "A Digital Product Reselling Platform offering a wide range of digital products, including software licenses, e-books, online courses, and design assets for creative professionals.",
+      liveUrl: "https://asadtechbd.netlify.app",
+      codeUrl: "https://github.com/AsadFahimTEC/Asad-Tech-BD",
       gradient: "from-purple-500 to-pink-500",
+      image: "https://s.wordpress.com/mshots/v1/https://asadtechbd.netlify.app?w=900",
+      imageAlt: "Asad Tech BD website screenshot",
     },
   ];
 
@@ -81,23 +90,34 @@ const EventCategories = () => {
           </p>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {projects.map((project, index) => (
+        <motion.div variants={containerVariants} className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project) => (
             <motion.div
               key={project.id}
               variants={cardVariants}
               whileHover={{ y: -8 }}
-              className="group relative overflow-hidden rounded-3xl border border-white/10 bg-slate-900/50 p-6 shadow-2xl backdrop-blur-xl transition-all hover:border-purple-400/30 hover:shadow-purple-500/20"
+              className="group relative overflow-hidden rounded-3xl border border-white/10 bg-slate-900/50 shadow-2xl backdrop-blur-xl transition-all hover:border-purple-400/30 hover:shadow-purple-500/20"
             >
               <div className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${project.gradient}`} />
 
-              <div className="relative z-10">
-                <div className="mb-4 flex items-center justify-between">
+              <div className="relative overflow-hidden">
+                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="relative block h-56 overflow-hidden rounded-t-3xl bg-slate-950">
+                  <img
+                    src={project.image}
+                    alt={project.imageAlt}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <span className="absolute left-4 top-4 rounded-full bg-slate-950/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-100 shadow-lg">
+                    Live snapshot
+                  </span>
+                </a>
+              </div>
+
+              <div className="relative z-10 space-y-5 p-6">
+                <div className="flex items-center justify-between">
                   <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-slate-300">
-                    Project {String(project.id).padStart(2, '0')}
+                    Project {String(project.id).padStart(2, "0")}
                   </span>
                   <div className="flex space-x-2">
                     <a
@@ -119,15 +139,12 @@ const EventCategories = () => {
                   </div>
                 </div>
 
-                <h3 className="mb-3 text-xl font-bold text-white sm:text-2xl">
-                  {project.title}
-                </h3>
+                <div>
+                  <h3 className="mb-3 text-xl font-bold text-white sm:text-2xl">{project.title}</h3>
+                  <p className="text-slate-300 leading-relaxed">{project.description}</p>
+                </div>
 
-                <p className="text-slate-300 leading-relaxed">
-                  {project.description}
-                </p>
-
-                <div className="mt-6 flex items-center justify-between">
+                <div className="mt-4 flex items-center justify-between">
                   <div className={`h-2 flex-1 rounded-full bg-gradient-to-r ${project.gradient} opacity-20`} />
                   <div className="ml-4 flex space-x-1">
                     <div className={`h-2 w-2 rounded-full bg-gradient-to-r ${project.gradient}`} />

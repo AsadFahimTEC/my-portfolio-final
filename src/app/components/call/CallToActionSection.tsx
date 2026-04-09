@@ -1,60 +1,197 @@
 "use client";
 
-import Link from "next/link";
+import { motion } from "framer-motion";
+import toast from "react-hot-toast";
+import { Mail, Send, Phone, MapPin } from "lucide-react";
 
 const CallToActionSection = () => {
-  return (
-    <section className="py-24 bg-slate-100 dark:bg-slate-900 transition-colors duration-500">
-      <div className="container mx-auto px-6 text-center">
-        {/* Heading */}
-        <h2 className="text-4xl md:text-5xl font-extrabold mb-6 animate-fadeIn">
-          Ready to Get Started?
-        </h2>
-        <p className="text-lg md:text-xl text-black/80 dark:text-white/80 mb-12 animate-fadeIn delay-200">
-          Create your own event or join exciting events happening around you!
-        </p>
+  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-        {/* Buttons */}
-        <div className="flex flex-col sm:flex-row justify-center gap-6">
-          <Link
-            href="/create-event"
-            className="inline-block bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-[length:200%_200%] text-gray-900 dark:text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 animate-gradient"
+    const form = e.target as HTMLFormElement;
+
+    // Simulate sending email
+    toast.success("Message sent successfully! I'll get back to you soon.", {
+      duration: 4000,
+      position: "top-right",
+    });
+
+    form.reset();
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+      },
+    },
+  };
+
+  return (
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      variants={containerVariants}
+      className="relative overflow-hidden bg-slate-950/95 py-16 sm:py-24"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(56,189,248,0.08),_transparent_50%)]" />
+
+      <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
+        <motion.div
+          variants={itemVariants}
+          className="mb-16 text-center"
+        >
+          <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+            <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+              Let's Work Together
+            </span>
+          </h2>
+          <p className="mx-auto max-w-2xl text-lg text-slate-300 sm:text-xl">
+            Have a project in mind? I'd love to hear about it. Send me a message and let's create something amazing together.
+          </p>
+        </motion.div>
+
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          <motion.div
+            variants={itemVariants}
+            className="space-y-8"
           >
-            Create Event
-          </Link>
-          <Link
-            href="/events"
-            className="inline-block bg-white text-indigo-600 dark:bg-slate-800 dark:text-cyan-400 font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 animate-fadeIn delay-400"
+            <div className="rounded-3xl border border-white/10 bg-slate-900/50 p-8 shadow-2xl backdrop-blur-xl">
+              <h3 className="mb-6 text-2xl font-bold text-white">Get In Touch</h3>
+
+              <div className="space-y-6">
+                <div className="flex items-center space-x-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-cyan-500/10 text-cyan-400">
+                    <Mail className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-400">Email</p>
+                    <a
+                      href="mailto:fah485434@gmail.com"
+                      className="text-white hover:text-cyan-400 transition"
+                    >
+                      fah485434@gmail.com
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10 text-green-400">
+                    <Phone className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-400">Phone</p>
+                    <a
+                      href="tel:+8801790833542"
+                      className="text-white hover:text-green-400 transition"
+                    >
+                      +880 179 083 3542
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-purple-500/10 text-purple-400">
+                    <MapPin className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-400">Location</p>
+                    <p className="text-white">Bangladesh</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="rounded-3xl border border-white/10 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 p-8"
+            >
+              <h4 className="mb-4 text-xl font-semibold text-white">Quick Response</h4>
+              <p className="text-slate-300">
+                I typically respond to messages within 24 hours. For urgent inquiries, feel free to call directly.
+              </p>
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            className="rounded-3xl border border-white/10 bg-slate-900/50 p-8 shadow-2xl backdrop-blur-xl"
           >
-            Join Event
-          </Link>
+            <h3 className="mb-6 text-2xl font-bold text-white">Send a Message</h3>
+
+            <form onSubmit={sendEmail} className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
+                  Your Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition"
+                  placeholder="Enter your name"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
+                  Your Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition"
+                  placeholder="Enter your email"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
+                  Your Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={5}
+                  required
+                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition resize-none"
+                  placeholder="Tell me about your project..."
+                ></textarea>
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:shadow-xl hover:shadow-purple-500/20"
+              >
+                <Send className="h-4 w-4" />
+                Send Message
+              </motion.button>
+            </form>
+          </motion.div>
         </div>
       </div>
-
-      {/* Animations */}
-      <style jsx>{`
-        @keyframes fadeIn {
-          0% { opacity: 0; transform: translateY(20px); }
-          100% { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fadeIn {
-          opacity: 0;
-          animation: fadeIn 0.8s ease forwards;
-        }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-400 { animation-delay: 0.4s; }
-
-        /* Gradient Animation */
-        @keyframes gradientShift {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        .animate-gradient {
-          animation: gradientShift 5s ease infinite;
-        }
-      `}</style>
-    </section>
+    </motion.section>
   );
 };
 

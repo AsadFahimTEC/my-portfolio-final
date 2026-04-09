@@ -66,7 +66,7 @@ export default function NavBar() {
         <motion.span
           initial={{ x: -320, opacity: 0.16, y: -8 }}
           animate={{ x: 1280 }}
-          transition={{ repeat: Infinity, duration: 34, ease: "linear" }}
+          transition={{ repeat: Infinity, duration: 34 }}
           className="absolute left-0 top-6 inline-block whitespace-nowrap text-4xl font-black uppercase tracking-[0.56em] text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-fuchsia-300 to-purple-400"
         >
           #JusticeForHadi
@@ -74,7 +74,7 @@ export default function NavBar() {
         <motion.span
           initial={{ x: 280, opacity: 0.12, y: 10 }}
           animate={{ x: -1040 }}
-          transition={{ repeat: Infinity, duration: 38, ease: "linear" }}
+          transition={{ repeat: Infinity, duration: 38 }}
           className="absolute left-0 top-16 inline-block whitespace-nowrap text-3xl font-black uppercase tracking-[0.42em] text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-fuchsia-300 to-purple-400"
         >
           #JusticeForHadi

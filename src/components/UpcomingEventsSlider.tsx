@@ -75,7 +75,6 @@ const UpcomingEventsSlider = () => {
                     repeat: Infinity,
                     repeatType: "loop",
                     duration: 20,
-                    ease: "linear",
                   },
                 },
               }}

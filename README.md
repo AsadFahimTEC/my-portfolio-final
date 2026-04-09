@@ -240,7 +240,7 @@ const containerVariants = {
 | Resource | Link |
 |----------|------|
 | **GitHub Repository** | [my-portfolio-final](https://github.com/AsadFahimTEC/my-portfolio-final) |
-| **Live Website** | [Portfolio](https://my-portfolio-final.vercel.app) |
+| **Live Website** | [Portfolio](https://planora-client-qv31ebsih-md-asaduzzamans-projects-da347e02.vercel.app) |
 | **Contact Email** | fah485434@gmail.com |
 | **Phone** | +880 179 083 3542 |
 

@@ -47,7 +47,7 @@ const Footer = () => {
       <motion.span
         initial={{ x: -280, opacity: 0.12, y: -4 }}
         animate={{ x: 1180 }}
-        transition={{ repeat: Infinity, duration: 34, ease: "linear" }}
+        transition={{ repeat: Infinity, duration: 34 }}
         className="pointer-events-none absolute left-0 top-10 z-0 inline-block whitespace-nowrap text-4xl font-black uppercase tracking-[0.5em] text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-fuchsia-300 to-purple-400"
       >
         #JusticeForHadi
@@ -55,7 +55,7 @@ const Footer = () => {
       <motion.span
         initial={{ x: 280, opacity: 0.1, y: 10 }}
         animate={{ x: -980 }}
-        transition={{ repeat: Infinity, duration: 38, ease: "linear" }}
+        transition={{ repeat: Infinity, duration: 38 }}
         className="pointer-events-none absolute left-0 top-24 z-0 inline-block whitespace-nowrap text-3xl font-black uppercase tracking-[0.4em] text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-cyan-300 to-pink-300"
       >
         #JusticeForHadi

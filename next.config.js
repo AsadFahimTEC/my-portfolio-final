@@ -27,11 +27,12 @@
 // export default nextConfig;
 
 // import "./src/env";
-import type { NextConfig } from "next";
+// import type { NextConfig } from "next";
+/** @type {import('next').NextConfig} */
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
+// const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
@@ -42,14 +43,19 @@ const nextConfig: NextConfig = {
     ],
   },
 
+output: "export",
+images: {
+    unoptimized: true,
+  },
+
   async rewrites() {
     return [
       {
         source: "/api/auth/:path*",
-        destination: `${BACKEND_URL}/api/auth/:path*`,
+        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000"}/api/auth/:path*`,
       },
     ];
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

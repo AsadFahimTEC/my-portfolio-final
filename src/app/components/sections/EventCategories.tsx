@@ -1,207 +1,167 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { ExternalLink, Github } from "lucide-react";
 
-type EventType = "Public" | "Private";
-type EventFee = "Free" | "Paid";
-
-interface EventCard {
-  id: string;
-  title: string;
-  type: EventType;
-  fee: EventFee;
-  date: string;
-  time: string;
-  venue: string;
-  description: string;
-}
-
-export default function EventDashboard() {
-  const [events, setEvents] = useState<EventCard[]>([]);
-  const [filters, setFilters] = useState<string[]>(["All"]);
-  const [activeFilter, setActiveFilter] = useState<string>("All");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  const gradients = [
-    "bg-gradient-to-br from-indigo-400 to-purple-500",
-    "bg-gradient-to-br from-pink-400 to-red-500",
-    "bg-gradient-to-br from-green-400 to-teal-500",
-    "bg-gradient-to-br from-yellow-400 to-orange-500",
-    "bg-gradient-to-br from-cyan-400 to-blue-500",
-    "bg-gradient-to-br from-purple-400 to-pink-500",
+const EventCategories = () => {
+  const projects = [
+    {
+      id: 1,
+      title: "JourneyJive",
+      description: "A comprehensive tourist guide platform offering 6 popular packages including JiveDiscover, JiveVoyages, JiveDestiny, JiveOdyssey, JiveWanderlust, and JiveHorizons for seamless travel planning.",
+      liveUrl: "https://peoplepro-af1ed.web.app",
+      codeUrl: "https://github.com/AsadFahimTEC/b8a12-client-side",
+      gradient: "from-blue-500 to-cyan-500",
+    },
+    {
+      id: 2,
+      title: "BookStore",
+      description: "A book services platform providing book recommendations, literary events calendar, book club subscriptions, and bookstore loyalty programs for avid readers.",
+      liveUrl: "https://654cd7a74cf70141250f52fc--cosmic-crisp-16b882.netlify.app",
+      codeUrl: "https://github.com/AsadFahimTEC/b8a11-client-side",
+      gradient: "from-green-500 to-emerald-500",
+    },
+    {
+      id: 3,
+      title: "Drinko",
+      description: "A food and beverage platform featuring 6 major brands including Coca-Cola, McDonald's, Starbucks, PepsiCo, Nestlé, and Kellogg's with an intuitive navigation experience.",
+      liveUrl: "https://brand-shop-e0506.web.app",
+      codeUrl: "https://github.com/AsadFahimTEC/b8a10-brandshop-client-side",
+      gradient: "from-purple-500 to-pink-500",
+    },
   ];
 
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        setLoading(true);
-        setError("");
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
 
-        // ✅ Use token if your backend requires auth
-        const token = localStorage.getItem("token");
-
-        const res = await fetch("http://localhost:5000/api/events", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token ? `Bearer ${token}` : "",
-          },
-          credentials: "include", // if backend uses cookies
-        });
-
-        const result = await res.json();
-
-        if (!res.ok) {
-          throw new Error(result.message || "Failed to fetch events");
-        }
-
-        const data: EventCard[] = result.data || result;
-
-        setEvents(data);
-
-        // Generate dynamic filters
-        const dynamicFilters = ["All"];
-        data.forEach((event) => {
-          const filterName = `${event.type} ${event.fee}`;
-          if (!dynamicFilters.includes(filterName))
-            dynamicFilters.push(filterName);
-        });
-        setFilters(dynamicFilters);
-      } catch (err: any) {
-        setError(err.message || "Something went wrong");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchEvents();
-  }, []);
-
-  const filteredEvents = events.filter((event) => {
-    if (activeFilter === "All") return true;
-    const [type, fee] = activeFilter.split(" ") as [EventType, EventFee];
-    return event.type === type && event.fee === fee;
-  });
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+      },
+    },
+  };
 
   return (
-    <section className="py-24 bg-slate-100 dark:bg-slate-900 transition-colors duration-500">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Heading */}
-        <div className="text-center mb-14">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
-            Event Categories
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      variants={containerVariants}
+      className="relative overflow-hidden bg-slate-950/95 py-16 sm:py-24"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(139,92,246,0.08),_transparent_50%)]" />
+
+      <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-16 text-center"
+        >
+          <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+            <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent">
+              My Projects
+            </span>
           </h2>
-          <p className="mt-4 text-lg text-slate-600 dark:text-slate-400">
-            Browse all upcoming events and filter by type & fee
+          <p className="mx-auto max-w-2xl text-lg text-slate-300 sm:text-xl">
+            Explore my recent work showcasing modern web development techniques and creative solutions.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-4 mb-14">
-          {filters.map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 border ${
-                activeFilter === filter
-                  ? "bg-indigo-600 text-white border-indigo-600 shadow-lg scale-105"
-                  : "bg-slate-300 text-slate-800 border-slate-400 hover:bg-slate-400 dark:bg-slate-700 dark:text-slate-200 dark:border-slate-600 dark:hover:bg-slate-600"
-              }`}
+        <motion.div
+          variants={containerVariants}
+          className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {projects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              variants={cardVariants}
+              whileHover={{ y: -8 }}
+              className="group relative overflow-hidden rounded-3xl border border-white/10 bg-slate-900/50 p-6 shadow-2xl backdrop-blur-xl transition-all hover:border-purple-400/30 hover:shadow-purple-500/20"
             >
-              {filter}
-            </button>
-          ))}
-        </div>
+              <div className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${project.gradient}`} />
 
-        {/* Loading / Error */}
-        {loading && (
-          <p className="text-center text-lg text-slate-600 dark:text-slate-400">
-            Loading events...
-          </p>
-        )}
-        {error && (
-          <p className="text-center text-red-500 text-lg mb-4">{error}</p>
-        )}
-
-        {/* Event Cards */}
-        {!loading && !error && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredEvents.length > 0 ? (
-              filteredEvents.map((event, idx) => {
-                const gradient = gradients[idx % gradients.length];
-                const eventDateTime = new Date(`${event.date} ${event.time}`);
-                return (
-                  <div
-                    key={event.id}
-                    className={`rounded-3xl p-6 transition-all duration-500 transform hover:-translate-y-2 shadow-md hover:shadow-xl text-white ${gradient} animate-fadeUp`}
-                    style={{ animationDelay: `${idx * 0.15}s` }}
-                  >
-                    <h3 className="text-2xl font-bold mb-3">{event.title}</h3>
-
-                    <div className="flex gap-3 mb-4">
-                      <span className="px-3 py-1 text-xs font-semibold rounded-full bg-white/30 text-white">
-                        {event.type}
-                      </span>
-                      <span className="px-3 py-1 text-xs font-semibold rounded-full bg-black/30 text-white">
-                        {event.fee}
-                      </span>
-                    </div>
-
-                    {/* Format Date & Time dynamically */}
-                    <p className="text-sm mb-2">
-                      <span className="font-semibold">Date:</span>{" "}
-                      {eventDateTime.toLocaleDateString("en-BD", {
-                        weekday: "short",
-                        day: "numeric",
-                        month: "short",
-                        year: "numeric",
-                      })}
-                    </p>
-                    <p className="text-sm mb-2">
-                      <span className="font-semibold">Time:</span>{" "}
-                      {eventDateTime.toLocaleTimeString("en-BD", {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        hour12: true,
-                      })}
-                    </p>
-                    <p className="text-sm mb-2">
-                      <span className="font-semibold">Venue:</span>{" "}
-                      {event.venue}
-                    </p>
-
-                    <p className="text-sm leading-relaxed">
-                      {event.description}
-                    </p>
+              <div className="relative z-10">
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-slate-300">
+                    Project {String(project.id).padStart(2, '0')}
+                  </span>
+                  <div className="flex space-x-2">
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full border border-white/10 bg-white/5 p-2 text-slate-400 transition hover:border-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-300"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
+                    <a
+                      href={project.codeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full border border-white/10 bg-white/5 p-2 text-slate-400 transition hover:border-purple-400 hover:bg-purple-400/10 hover:text-purple-300"
+                    >
+                      <Github className="h-4 w-4" />
+                    </a>
                   </div>
-                );
-              })
-            ) : (
-              <div className="col-span-full text-center text-slate-500 dark:text-slate-400 text-lg">
-                No events found for this filter.
-              </div>
-            )}
-          </div>
-        )}
-      </div>
+                </div>
 
-      {/* Animation */}
-      <style jsx>{`
-        @keyframes fadeUp {
-          0% {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fadeUp {
-          opacity: 0;
-          animation: fadeUp 0.7s ease forwards;
-        }
-      `}</style>
-    </section>
+                <h3 className="mb-3 text-xl font-bold text-white sm:text-2xl">
+                  {project.title}
+                </h3>
+
+                <p className="text-slate-300 leading-relaxed">
+                  {project.description}
+                </p>
+
+                <div className="mt-6 flex items-center justify-between">
+                  <div className={`h-2 flex-1 rounded-full bg-gradient-to-r ${project.gradient} opacity-20`} />
+                  <div className="ml-4 flex space-x-1">
+                    <div className={`h-2 w-2 rounded-full bg-gradient-to-r ${project.gradient}`} />
+                    <div className={`h-2 w-2 rounded-full bg-gradient-to-r ${project.gradient} opacity-60`} />
+                    <div className={`h-2 w-2 rounded-full bg-gradient-to-r ${project.gradient} opacity-30`} />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+          className="mt-16 text-center"
+        >
+          <p className="text-slate-400">
+            More projects coming soon. Check out my{" "}
+            <a
+              href="https://github.com/AsadFahimTEC"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-purple-400 hover:text-purple-300 transition"
+            >
+              GitHub
+            </a>{" "}
+            for the latest updates.
+          </p>
+        </motion.div>
+      </div>
+    </motion.section>
   );
-}
+};
+
+export default EventCategories;

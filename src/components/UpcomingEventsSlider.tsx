@@ -19,6 +19,9 @@ const UpcomingEventsSlider = () => {
     { name: "Next.js", src: "https://i.ibb.co/TPtC5jD/1-t-OI6-UC5-Ea-S2f-PIt-Ces-I-AQ-removebg-preview.png" },
     { name: "Express.js", src: "https://i.ibb.co/ZTq2R4Z/png-transparent-express-js-node-js-javascript-mongodb-node-js-text-trademark-logo-removebg-preview.png" },
     { name: "MongoDB", src: "https://i.ibb.co/PZ1Cpf5/1-do-Ag1-f-MQKWFoub-6gw-Ui-Q-removebg-preview.png" },
+    {name: "Tailwind CSS", src: "https://i.ibb.co.com/Ld4MvD3j/download.png" },
+    {name: "PostgreSQL", src: "https://i.ibb.co.com/nd9h88G/Postgresql-elephant-svg.png" },
+    {name: "Prisma ORM", src: "https://i.ibb.co.com/twDV77zb/download-1.png" },
   ];
 
   const duplicatedSkills = [...skills, ...skills]; // Duplicate for seamless loop

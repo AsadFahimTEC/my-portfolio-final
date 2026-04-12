@@ -93,7 +93,7 @@ export default function NavBar() {
           </div>
           <div>
             <p className="text-base font-semibold text-white">MD. Asaduzzaman</p>
-            <p className="text-xs uppercase tracking-[0.25em] text-slate-400">Frontend Developer</p>
+            <p className="text-xs uppercase tracking-[0.25em] text-slate-400">Full Stack Web Developer</p>
           </div>
         </motion.div>
 

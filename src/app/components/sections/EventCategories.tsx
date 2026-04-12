@@ -18,14 +18,14 @@ const EventCategories = () => {
     },
     {
       id: 2,
-      title: "BookStore",
+      title: "SkillBridge",
       description:
-        "A book services platform providing book recommendations, literary events calendar, book club subscriptions, and bookstore loyalty programs for avid readers.",
-      liveUrl: "https://654cd7a74cf70141250f52fc--cosmic-crisp-16b882.netlify.app",
-      codeUrl: "https://github.com/AsadFahimTEC/b8a11-client-side",
+        "SkillBridge is a comprehensive platform that connects skilled freelancers with clients seeking their expertise, offering a wide range of services across various industries for seamless collaboration and project success.",
+      liveUrl: "https://skillbridge-client-flame.vercel.app",
+      codeUrl: "https://github.com/AsadFahimTEC/skillbridge-client",
       gradient: "from-green-500 to-emerald-500",
-      image: "https://s.wordpress.com/mshots/v1/https://654cd7a74cf70141250f52fc--cosmic-crisp-16b882.netlify.app?w=900",
-      imageAlt: "BookStore website screenshot",
+      image: "https://s.wordpress.com/mshots/v1/https://skillbridge-client-flame.vercel.app?w=900",
+      imageAlt: "SkillBridge website screenshot",
     },
     {
       id: 3,
